@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
+import "tachyons";
 
 function Square(props) {
   return (
@@ -95,14 +96,19 @@ class Game extends React.Component {
     const moves = history.map((step, move) => {
       const desc = move ? `Go to move #${move}` : "Go to game start";
       return (
-        <li key={move}>
-          <button onClick={() => this.jumpTo(move)}>{desc}</button>
-        </li>
+        <div>
+          <button
+            onClick={() => this.jumpTo(move)}
+            className="f6 link dim br1 ba ph3 pv2 mb2 mid-gray"
+          >
+            {desc}
+          </button>
+        </div>
       );
     });
 
     return (
-      <div className="game">
+      <div className="game bg-washed-yellow">
         <div className="game-board">
           <Board
             onClick={(i) => this.handleClick(i)}
@@ -111,7 +117,7 @@ class Game extends React.Component {
         </div>
         <div className="game-info">
           <div>{status}</div>
-          <ol>{moves}</ol>
+          <div>{moves}</div>
         </div>
       </div>
     );
