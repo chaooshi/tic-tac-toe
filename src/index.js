@@ -5,7 +5,7 @@ import "tachyons";
 
 function Square(props) {
   return (
-    <button className="square" onClick={props.onClick}>
+    <button className={props.class} onClick={props.onClick}>
       {props.value}
     </button>
   );
@@ -19,6 +19,11 @@ class Board extends React.Component {
         onClick={() => {
           this.props.onClick(i);
         }}
+        class={
+          this.props.winSquares && this.props.winSquares.includes(i)
+            ? "winSquare"
+            : "square"
+        }
       />
     );
   }
@@ -84,19 +89,21 @@ class Game extends React.Component {
 
   render() {
     const history = this.state.history;
-    const current =
-      history[
-        this.state.stepNumber ? this.state.stepNumber : history.length - 1
-      ];
-    let winner = calculateWinner(current.squares);
-    const status = winner
-      ? `Winner: ${winner}`
-      : `Next player: ${this.state.xIsNext ? "X" : "O"}`;
+    const current = history[this.state.stepNumber];
+    const winSquares = calculateWinner(current.squares);
+    console.log(winSquares);
+    const winner = winSquares ? current.squares[winSquares[0]] : null;
+    const status =
+      this.state.history.length === 10
+        ? "game is a draw"
+        : winner
+        ? `Winner: ${winner}`
+        : `Next player: ${this.state.xIsNext ? "X" : "O"}`;
 
     const moves = history.map((step, move) => {
       const desc = move ? `Go to move #${move}` : "Go to game start";
       return (
-        <div>
+        <div key={move}>
           <button
             onClick={() => this.jumpTo(move)}
             className="f6 link dim br1 ba ph3 pv2 mb2 mid-gray"
@@ -113,6 +120,7 @@ class Game extends React.Component {
           <Board
             onClick={(i) => this.handleClick(i)}
             squares={current.squares}
+            winSquares={winSquares}
           />
         </div>
         <div className="game-info">
@@ -138,7 +146,7 @@ function calculateWinner(squares) {
   for (let i = 0; i < lines.length; i++) {
     let [a, b, c] = lines[i];
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
+      return lines[i];
     }
   }
   return null;

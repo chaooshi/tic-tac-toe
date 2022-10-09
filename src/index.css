@@ -32,14 +32,39 @@ body {
     text-align: center;
     width: 80px;
   }
-  
-  .square:focus {
+
+    .square:focus {
     outline: none;
   }
   
   .kbd-navigation .square:focus {
     background: #ddd;
   }
+
+  .winSquare {
+    background: rgb(246, 241, 89);
+    border: 1px solid rgb(106, 230, 12);
+    color:rgb(106,230,12);
+    float: left;
+    font-size: 24px;
+    font-weight: bolder;
+    line-height: 34px;
+    height: 80px;
+    margin-right: -1px;
+    margin-top: -1px;
+    padding: 0;
+    text-align: center;
+    width: 80px;
+  }
+
+  .winSquare:focus {
+    outline: none;
+  }
+  
+  .kbd-navigation .winSquare:focus {
+    background: rgb(218, 237, 10);
+  }
+
   
   .game {
     display: flex;
