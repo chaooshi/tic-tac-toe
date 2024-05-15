@@ -1,70 +1,115 @@
-# Getting Started with Create React App
+# Tic Tac Toe in React
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project Overview
 
-## Available Scripts
+This is a simple Tic Tac Toe game built with React. The backbone of the application is based on the [React tutorial](https://react.dev/learn/tutorial-tic-tac-toe). The project follows a component-based architecture and includes unit tests for all components to ensure reliability and maintainability. Styling is handled using Tachyons, a functional CSS toolkit, and Jest is used for unit testing.
 
-In the project directory, you can run:
+## Project Structure
 
-### `npm start`
+The project directory is organized as follows:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```
+tic-tac-toe
+├── src
+│ ├── tests
+│ │ ├── Board.spec.js
+│ │ ├── Game.spec.js
+│ │ └── Square.spec.js
+│ ├── components
+│ │ ├── Board.js
+│ │ ├── Game.js
+│ │ └── Square.js
+│ ├── index.css
+│ └── index.js
+├── package.json
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Components
 
-### `npm test`
+- **Board.js**: Represents the Tic Tac Toe board.
+- **Game.js**: Manages the game state and logic.
+- **Square.js**: Represents an individual square on the board.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Tests
 
-### `npm run build`
+- **Board.spec.js**: Unit tests for the Board component.
+- **Game.spec.js**: Unit tests for the Game component.
+- **Square.spec.js**: Unit tests for the Square component.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Styling
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Tachyons is used for styling the components. It provides a set of CSS utility classes that help in quickly building responsive and visually appealing UI components.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Unit Testing
 
-### `npm run eject`
+Jest is used to write and run unit tests. The tests ensure that each component functions correctly and that changes do not introduce any regressions.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Running Tests
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+To run the tests and see the coverage report, use the following command:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```sh
+npm run test:coverage
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+This command will run all the tests and generate a coverage report, which will show <strong>100% coverage </strong>for the project.
 
-## Learn More
+## Getting Started
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Prerequisites
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Make sure you have Node.js and npm installed on your machine.
 
-### Code Splitting
+### Installation
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+1. Clone the repository:
 
-### Analyzing the Bundle Size
+   ```sh
+   git clone https://github.com/chaooshi/tic-tac-toe.git
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+2. Navigate to the project directory:
 
-### Making a Progressive Web App
+   ```sh
+   cd tic-tac-toe
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+3. Install the dependencies:
 
-### Advanced Configuration
+   ```sh
+   npm install
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Running the Application
 
-### Deployment
+To start the application, run:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```sh
+npm start
 
-### `npm run build` fails to minify
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The application will be available at http://localhost:3000.
+
+### Running Tests
+
+To run the unit tests:
+
+```sh
+npm test
+
+```
+
+To run the tests and see the coverage report:
+
+```sh
+npm run test:coverage
+```
+
+## Contact
+
+If you have any questions or feedback, feel free to reach out at [my mail](mailto:chaooshi@gmail.com).
+
+---
+
+Enjoy playing Tic Tac Toe!
