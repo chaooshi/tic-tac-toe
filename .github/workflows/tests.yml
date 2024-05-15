@@ -1,0 +1,40 @@
+name: Tests
+on: push
+jobs:
+  TestsSetup:
+    runs-on: ubuntu-latest;
+    outputs:
+      test-chunks: ${{steps.set-test-chunks.outputs.TEST_CHUNKS}}
+      test-chunks-ids: ${{steps.set-test-chunks-ids.outputs.TEST_CHUNKS_IDS}}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "latest"
+      - run: npm ci
+      - id: set-test-chunks
+        name: Set Chunks
+        run: echo "TEST_CHUNKS=$(npx jest --listTests --json | jq -c '.[]' | shuf |jq -s '.' | jq -c '[_nwise(length / 2 | floor)]')" >> $GITHUB_OUTPUT
+      - id: set-test-chunks-ids
+        name: Set Chunks IDs
+        run: echo "TEST_CHUNKS_IDS=$(echo $TEST_CHUNKS | jq -c 'to_entries | map(.key)')" >> $GITHUB_OUTPUT
+        env:
+          TEST_CHUNKS: ${{ steps.set-test-chunks.outputs.TEST_CHUNKS}}
+  RunTests:
+    runs-on: ubuntu-latest;
+    name: Run Tests (chunk ${{ matrix.chunk }})
+    needs:
+      - TestsSetup
+    strategy:
+      fail-fast: false
+      matrix:
+        chunk: ${{ fromJson(needs.TestsSetup.outputs.test-chunks-ids) }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "latest"
+      - run: npm ci
+      - run: echo $TEST_CHUNKS | jq '.[${{ matrix.chunk}}] | .[] | @text' | xargs npm test
+        env:
+          TEST_CHUNKS: ${{ needs.TestsSetup.outputs.test-chunks }}
